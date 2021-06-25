@@ -32,8 +32,11 @@ jobs:
       - name: Create zip deployment package
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
         
+      - name: Print credentials
+        run : echo ${{ secrets.MY_AWS_ACCESS_KEY }}; echo ${{ secrets.MY_AWS_SECRET_KEY }}
+        
       - name: Configure my AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id    : ${{ secrets.MY_AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
